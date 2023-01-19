@@ -1,0 +1,32 @@
+.name {
+    background-color: aqua;
+    font: 40px;
+    height: 100px;
+}
+a{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: 'bold';
+    padding-top: 180px;;
+    background-color: transparent;
+    cursor: grab;
+    color: black;
+}
+.surv{
+    padding-top: 50px;
+    padding-left: 150px;
+    font-size: 40px;
+    font-weight: 500;
+}
+.home{
+    padding-top: 50px;
+    padding-left: 50px;
+    font-size: 30px;
+    font-weight: 500;
+}
+.abt{
+    margin-top: 30px;
+    padding-top: 50px;
+    padding-left: 50px;
+    font-size: 30px;
+    font-weight: 500;
+}
