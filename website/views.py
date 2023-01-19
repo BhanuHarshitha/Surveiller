@@ -1,11 +1,10 @@
 from django.shortcuts import render
-#from django.http import HttpResponse
-#from django.template import loader
+
 # Create your views here.
 
-def base(request):
+def home(request):
     #temp=loader.get_template('htmlfiles\main.html')
-    return render(request, 'website/base.html')
+    return render(request, 'website/home.html')
 
-def home(reqeust):
-    return render(reqeust, 'website/home.html')
+def about(request):
+    return render(request, 'website/about.html')
