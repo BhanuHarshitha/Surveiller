@@ -35,13 +35,16 @@
   font-family:Verdana, Geneva, Tahoma, sans-serif; 
   padding-right: 150px; 
   font-size: 18px;
-  text-align: center;
+
+}
+.alert{
+  border: 1px solid white; 
+  background-color: white; 
+
 }
 .sign{
   padding-left: 500px; 
   padding-top: 100px; 
-  border: 1px solid white; 
-  background-color: white; 
   width: 1430px; 
   margin-left: -150px; 
   margin-top: 60px;
