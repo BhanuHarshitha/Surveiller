@@ -40,6 +40,12 @@
 .alert{
   border: 1px solid white; 
   background-color: white; 
+  padding-left: 500px; 
+  padding-top: 100px; 
+  width: 1430px; 
+  margin-left: -150px; 
+  margin-top: 60px;
+  height: 300px;
 
 }
 .sign{
