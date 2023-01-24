@@ -18,11 +18,11 @@
           <a class="navbar-brand" href="/" style="color:white">Downtime Surveiller</a>
         </div>
         <!--ul class="nav navbar-nav">
-          <li><a href="{%url 'website-home'%}" style="color:white">Home</a></li>
+          <li><a href="/" style="color:white">Home</a></li>
           <li><a href="{%url 'website-about'%}" style="color:white">About</a></li>
         </ul-->
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" style="color:white"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a href="{% url 'login' %}" style="color:white"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
       </div>
     </nav>
@@ -31,6 +31,13 @@
 <main role="main" class="container">
   <div class="row">
    <div class="col-md-8">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
        {% block content %}{% endblock %}
    </div>
   </div>

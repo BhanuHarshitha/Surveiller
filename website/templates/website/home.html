@@ -14,14 +14,24 @@
         <div style="padding-left: 700px; margin-top: -225px;">
             <img src="{% static 'website\websites.jpg' %}" class="thumbnail" alt="list of websites"> 
         </div>
-        <div class="alert" style="background-color: white;">
-            <h2 id="galert" style="padding-right: 150px;">Get alerts of your choice</h2>
-            <p id="answer" style="text-align: left;">If a website becomes unavailable or slow down you should know within a time. This application will send alerts through email, googlechat or teams. Automate tasks using web hooks to start external actions.</p>
+
+        
+        <div class="alert" style="background-color: white; width: 1430px; margin-left: -150px; margin-top: 60px; height: 400px;">
+            <img src="{% static 'website\alert.png' %}" alt="alert" style="margin-left: -350px; margin-top: -80px;"> 
+            <h2 id="galert" style="margin-top: -250px; padding-left: 250px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 600; ">Get alerts of your choice</h2>
+            <p id="answer" style="text-align: left; padding-left:250px; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 18px;">If a website becomes unavailable or slow down you should know within a time. This application will send alerts through email, googlechat or teams. Automate tasks using web hooks to start external actions.</p>
         </div>
-        <div class="sign">
-            <h1 id="create">Create an account</h1>
-            <button type="button" class="btn btn-success" id="act">Sign up</button>
+        <div class="sign" style="background-color: aliceblue;">
+            <h1 id="create" style="margin-top: -30px;">Create an account</h1><br>
+            <button type="submit" class="btn btn-info" id="my-button" style=" margin-left: 180px; width:100px; height: 50px; background-color: forestgreen;" href="{% url 'login' %}">Sign up</button>
         </div>
+
+    <script>
+        var button = document.getElementById("my-button");
+        button.addEventListener("click", function(){
+            window.location.href = "register/";
+        });
+    </script>
                 
     </body>
 {% endblock content%}
