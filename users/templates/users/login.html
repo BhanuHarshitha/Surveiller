@@ -146,7 +146,7 @@ button{
         <input type="text" placeholder="Enter Username" id="username" name="username">
 
         <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="pass">
+        <input type="password" placeholder="Password" id="password" name="password">
 
         <button type="submit">Log In</button>
         <!-- <input type="button" value=""> -->
@@ -154,7 +154,14 @@ button{
           <div class="go"><i class="fab fa-google"></i>  Google</div>
           <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
         </div> -->
-        <a href="{% url 'register' %}" >Create a account</a>
+        {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+            <a href="{% url 'register' %}" >Create a account</a>
     </form>
 </body>
 </html>

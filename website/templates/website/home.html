@@ -4,7 +4,7 @@
     <body>
         <div class="start">
             <h1 id="matter">Know the status of your websites</h1>
-            <button type="button" class="btn btn-info" id="smon">Start Monitoring</button>
+            <button type="button" class="btn btn-info" id="smon" >Start Monitoring</button>
             <p style="margin-left:587px">*Monitor your websites by signing up</p>
         </div>
         <div class="how">
@@ -32,6 +32,13 @@
             window.location.href = "register/";
         });
     </script>
+
+<script>
+    var button = document.getElementById("smon");
+    button.addEventListener("click", function(){
+        window.location.href = "register/";
+    });
+</script>
                 
     </body>
 {% endblock content%}
