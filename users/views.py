@@ -31,7 +31,7 @@ def LoginPage(request):
         user=authenticate(request,username=username,password=pass1)
         if user is not None:
             login(request,user)
-            return redirect('website-home')
+            return redirect('dasboard/index.html')
         else:
             messages.info("Username or Password is incorrect!!!")
     
