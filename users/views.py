@@ -3,10 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .forms import UserUpdateForm
 # Create your views here.
-@login_required(login_url='login')
-def HomePage(request):
-    return render (request,'website/home.html')
 
 def register(request):
     if request.method=='POST':
@@ -31,7 +29,7 @@ def LoginPage(request):
         user=authenticate(request,username=username,password=pass1)
         if user is not None:
             login(request,user)
-            return redirect('dasboard/index.html')
+            return redirect('index')
         else:
             messages.info("Username or Password is incorrect!!!")
     
@@ -40,3 +38,23 @@ def LoginPage(request):
 def LogoutPage(request):
     logout(request)
     return redirect('website-home')
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        
+        if u_form.is_valid():
+            u_form.save()
+       
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        
+    context={
+        'u_form':u_form,
+    
+    }
+    return render(request, 'users/profile.html',context)

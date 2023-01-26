@@ -119,16 +119,16 @@ body{
     <div class="sidebar">
         <h2>Dashboard</h2>
         <ul>
-            <li><a href="#" style="font-size: 17px;"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#" style="font-size: 17px;"><i class="fas fa-project-diagram"></i>Status</a></li>
-            <li><a href="#" style="font-size: 17px;"><i class="fas fa-address-card"></i>About</a></li>
+            <li><a href="{%url 'index'%}" style="font-size: 17px;"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="{%url 'status'%}" style="font-size: 17px;"><i class="fas fa-project-diagram"></i>Status</a></li>
+            <li><a href="{%url 'website-about'%}" style="font-size: 17px;"><i class="fas fa-address-card"></i>About</a></li>
 
         </ul> 
     </div>
     <div class="main_content">
         <div class="header" style="font-weight: 300; font-size: 25px; color: black;" >Downtime Surveiller
           <ul class="nav navbar-nav navbar-right" >
-            <li><a href="#" style="margin-top: -12px; color: black; font-size: 18px;"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="{% url 'profile' %}" style="margin-top: -12px; color: black; font-size: 18px;"><i class="fas fa-user"></i>Profile</a></li>
             <li><a href="{% url 'logout' %}" style="color:black; margin-top: -12px; cursor: pointer; font-size: 18px;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
           

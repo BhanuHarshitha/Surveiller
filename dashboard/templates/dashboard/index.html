@@ -2,36 +2,60 @@
 {% block content %}
 {% load static %}
 <body>
-<form>
-    {% csrf_token %}
-    <label for="upload">Upload the file</label>
-    <input type="file" id="upload" name="upload" required><br><br>
-    
-    <label for="duration">Duration</label>
-    <select name="duration" id="duration" required>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select> <br>
-    
-    <p>Notify to</p>
-    <input type="radio" id="email" name="alert" Value="Email">
-    <label for="alert">Email</label><br>
-    <input type="radio" id="gchat" name="alert" Value="Googlechat">
-    <label for="alert">Google Chat</label><br>
-    <input type="radio" id="teams" name="alert" Value="Teams">
-    <label for="alert">Teams</label><br><br>
+    <div class="index">
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h2 style="color: black; text-align: center; font-weight: 600;">Add Tasks</h2>
+        <div>
+        <label for="file1">Drop your file</label>
+        <input type="file" accept="text/plain"> </div>
+        <div class="slider" id="slider_value">
+            <label for="fader">Check website for every  _  mins</label>
+            <input type="range" min="1" max="5" value="1" id="fader" 
+            step="1" list="volsettings">
+            <datalist id="volsettings">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            
+            </datalist>
+        </div>
 
-    <label for="pause">Pause alerts</label>
-    <select name="pause" id="pause" required>
-        <option value="15">15</option>
-        <option value="20">20</option>
-        <option value="25">30</option>
-        <option value="30">40</option>
-    </select> <br><br>
-</form>
-<button type="button" onclick="alert('Submitted')">Start Monitoring</button>
+        <div>
+            <label for="al">Send alerts to</label>
+            <fieldset data-role = "controlgroup" data-type = "horizontal">
+                <input type = "checkbox" id = "checkbox 1" />
+                <label for = "checkbox 1" style="font-size: 15px;">Email</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+                <input type = "checkbox" id = "checkbox 2" />
+                <label for = "checkbox 2" style="font-size: 15px;">Google Chat</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+                <input type = "checkbox" id = "checkbox 3" />
+                <label for = "checkbox 3" style="font-size: 15px;">Teams</label>
+             </fieldset>
+        </div>
+        <div>
+        <label for="pause">Pause alerts for</label>
+        <fieldset data-role = "controlgroup" data-type = "horizontal">
+            <input type="radio" name="optradio" checked>
+            <label for="opt1">15 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="optradio">
+            <label for="opt2">20 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="optradio">
+            <label for="opt3">25 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="optradio">
+            <label for="opt4">30 mins</label>
+          
+          </fieldset>
+          </div>
+        <br><br>
+        <button id="dash_but" type="submit" style="color: black;" onclick="alert('Submitted')">Start Monitoring</button>
+    </form>
+    
+</div>
+
 </body>
 {% endblock content %}
