@@ -4,15 +4,15 @@
 <body>
     <div class="index">
     </div>
-    <form method="post">
+    <form method="post" action="status">
         {% csrf_token %}
         <h2 style="color: black; text-align: center; font-weight: 600;">Add Tasks</h2>
         <div>
         <label for="file1">Drop your file</label>
-        <input type="file" accept="text/plain"> </div>
+        <input type="file" id="file1" name="file1" accept="text/plain"> </div>
         <div class="slider" id="slider_value">
             <label for="fader">Check website for every  _  mins</label>
-            <input type="range" min="1" max="5" value="1" id="fader" 
+            <input type="range" min="1" max="5" value="1" id="fader" name="fader"
             step="1" list="volsettings">
             <datalist id="volsettings">
             <option>1</option>
@@ -26,20 +26,42 @@
 
         <div>
             <label for="al">Send alerts to</label>
-            <fieldset data-role = "controlgroup" data-type = "horizontal">
-                <input type = "checkbox" id = "checkbox 1" />
-                <label for = "checkbox 1" style="font-size: 15px;">Email</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <fieldset data-role = "controlgroup" data-type = "horizontal" id="alerts_to" name="alerts_to">
+                <input type = "radio" id = "radio1" />
+                <label for = "opt1" style="font-size: 15px;">Email</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-                <input type = "checkbox" id = "checkbox 2" />
-                <label for = "checkbox 2" style="font-size: 15px;">Google Chat</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type = "radio" id = "radio2" />
+                <label for = "opt2" style="font-size: 15px;">Google Chat</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-                <input type = "checkbox" id = "checkbox 3" />
-                <label for = "checkbox 3" style="font-size: 15px;">Teams</label>
+                <input type = "radio" id = "radio3" />
+                <label for = "opt3" style="font-size: 15px;">Teams</label>
              </fieldset>
         </div>
         <div>
+            <label for="url">Enter appropriate Webhook URL</label>
+            <input type="url" id="w_url" name="w_url" placeholder="Enter webhook url">
+        </div>
+        {% if radio1 %}
+        <div>
+            <label for="url">Enter Email Webhook URL</label>
+            <input type="url" placeholder="Enter webhook url">
+        </div>
+        {% endif %}
+        {% if radio2 %}
+        <div>
+            <label for="url">Enter GoogleChat Webhook URL</label>
+            <input type="url" placeholder="Enter webhook url">
+        </div>
+        {% endif %}
+        {% if radio3 %}
+        <div>
+            <label for="url">Enter Teams Webhook URL</label>
+            <input type="url" placeholder="Enter webhook url">
+        </div>
+        {% endif %}
+        <div>
         <label for="pause">Pause alerts for</label>
-        <fieldset data-role = "controlgroup" data-type = "horizontal">
+        <fieldset data-role = "controlgroup" data-type = "horizontal" id="alert_res" name="alert_res">
             <input type="radio" name="optradio" checked>
             <label for="opt1">15 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="radio" name="optradio">
@@ -51,8 +73,8 @@
           
           </fieldset>
           </div>
-        <br><br>
-        <button id="dash_but" type="submit" style="color: black;" onclick="alert('Submitted')">Start Monitoring</button>
+        <br>
+        <button id="dash_but" type="submit" style="color: black;">Start Monitoring</button>
     </form>
     
 </div>
