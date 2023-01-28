@@ -31,6 +31,7 @@ urlpatterns = [
     path('index/',dash_views.userdashboard,name='index'),
     path('status/',dash_views.status,name='status'),
     path('dabout/',dash_views.dashabout,name='dabout'),
+    path('index/uploadTxt', dash_views.uploadTxt, name="uploadTxt"),
 ]
 
 

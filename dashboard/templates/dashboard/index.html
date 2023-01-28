@@ -4,7 +4,7 @@
 <body>
     <div class="index">
     </div>
-    <form method="post" action="status">
+    <form method="post" enctype="multipart/form-data" action="uploadTxt">
         {% csrf_token %}
         <h2 style="color: black; text-align: center; font-weight: 600;">Add Tasks</h2>
         <div>
@@ -25,51 +25,44 @@
         </div>
 
         <div>
-            <label for="al">Send alerts to</label>
+            <label for="optradio">Send alerts to</label>
             <fieldset data-role = "controlgroup" data-type = "horizontal" id="alerts_to" name="alerts_to">
-                <input type = "radio" id = "radio1" />
-                <label for = "opt1" style="font-size: 15px;">Email</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type = "radio" id="optradioe" name="optradios" value="email" />
+                <label for = "optradioe"  style="font-size: 15px;">Email</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-                <input type = "radio" id = "radio2" />
-                <label for = "opt2" style="font-size: 15px;">Google Chat</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type = "radio" id="optradiog" name="optradios" value="chat"/>
+                <label for = "optradiog"  style="font-size: 15px;">Google Chat</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-                <input type = "radio" id = "radio3" />
-                <label for = "opt3" style="font-size: 15px;">Teams</label>
+                <input type = "radio" id="optradiot" name="optradios" value="teams" />
+                <label for = "optradiot"  style="font-size: 15px;">Teams</label>
              </fieldset>
         </div>
         <div>
             <label for="url">Enter appropriate Webhook URL</label>
             <input type="url" id="w_url" name="w_url" placeholder="Enter webhook url">
         </div>
-        {% if radio1 %}
-        <div>
-            <label for="url">Enter Email Webhook URL</label>
-            <input type="url" placeholder="Enter webhook url">
+        
+        <!--div>
+            <label for="url" >Enter GoogleChat Webhook URL</label>
+            <input type="url" id="web_url" placeholder="Enter webhook url">
         </div>
-        {% endif %}
-        {% if radio2 %}
-        <div>
-            <label for="url">Enter GoogleChat Webhook URL</label>
-            <input type="url" placeholder="Enter webhook url">
-        </div>
-        {% endif %}
-        {% if radio3 %}
+     
         <div>
             <label for="url">Enter Teams Webhook URL</label>
             <input type="url" placeholder="Enter webhook url">
-        </div>
-        {% endif %}
+        </div-->
+    
         <div>
         <label for="pause">Pause alerts for</label>
         <fieldset data-role = "controlgroup" data-type = "horizontal" id="alert_res" name="alert_res">
-            <input type="radio" name="optradio" checked>
-            <label for="opt1">15 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="optradio">
-            <label for="opt2">20 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="optradio">
-            <label for="opt3">25 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="optradio">
-            <label for="opt4">30 mins</label>
+            <input type="radio" name="optradio1" value="15">
+            <label for="opt11">15 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="optradio1" value="20">
+            <label for="opt21">20 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="optradio1" value="25">
+            <label for="opt31">25 mins</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="optradio1" value="30">
+            <label for="opt41">30 mins</label>
           
           </fieldset>
           </div>
@@ -78,6 +71,11 @@
     </form>
     
 </div>
+
+<script>
+    var email =  document.getElementById("alerts_to").value
+    console.log(email+"hi");
+</script>
 
 </body>
 {% endblock content %}

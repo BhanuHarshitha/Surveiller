@@ -2,15 +2,29 @@
 {% block content %}
 {% load static %}
 <body>
+  {% websites_list %}
     <table style="width:100%; border:1px solid black;">
         <tr>
-          <th style='border:1px solid black'>url</th>
-          <th style='border:1px solid black'>last status</th>
-          <th  style='border:1px solid black'>last checked</th>
-          <th  style='border:1px solid black'>last alert</th>
+          <th style='border:1px solid black'>URL</th>
+          <th style='border:1px solid black'>Status</th>
+          <th  style='border:1px solid black'>Status Send To</th>
+          <th  style='border:1px solid black'>Last Alert</th>
         </tr>
        
       </table>
+      <table class="highlight bordered responsive-table">
+
+        <tbody>
+        {% for website in websites_list %}
+          <thead>
+           <tr>
+             <th>{{website.status}}</th><td>{{website.url}</td>
+           </tr>
+          </thead>
+       {% endfor %}
+               </tbody>
+      </table>
+    {% endif %}
       
 </body>
 {% endblock content %}
