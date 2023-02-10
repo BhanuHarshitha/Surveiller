@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'django_q',
     
 ]
 
@@ -130,3 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_REDIRECT_URL='index'
+
+# # Configure your Q cluster
+# # More details https://django-q.readthedocs.io/en/latest/configure.html
+# Q_CLUSTER = {
+#     "name": "",
+#     "orm": "default",  # Use Django's ORM + database for broker
+# }

@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 <body>
-  {% websites_list %}
+  {% if websites_list %}
     <table style="width:100%; border:1px solid black;">
         <tr>
           <th style='border:1px solid black'>URL</th>

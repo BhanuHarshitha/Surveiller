@@ -8,6 +8,7 @@ from urllib.request import urlopen
 from urllib.error import URLError
 from urllib.error import HTTPError
 from http import HTTPStatus
+from django.contrib.auth.models import User
 
 def print_time():   
     now = datetime.now()
@@ -22,20 +23,22 @@ def get_website_status(url):
     try:
         with urlopen(f"https://{url}") as connection:
             code = connection.getcode()
+            #print(code)
             return code
     except HTTPError as e:
         return e.code
     except URLError as e:
         return e.reason
 
+# result = get_website_status("https://www.amazon.ca/")
 
-def sendAlert(request, website,url):
+def sendAlert(user_id, website,url):
     code=get_website_status(website)
     message_headers = {'Content-Type': 'application/json; charset=UTF-8'}
     bot={'text':"The website {} is down and the status is {}.".format(website,code)}
     http_obj = Http()
     response = http_obj.request(uri=url,method='POST',headers=message_headers,body=dumps(bot),)
-    user = request.user
+    user = User.objects.filter(id=user_id).first()
     print("user", user)
     if not Dashboard.objects.filter(url=website, user=user).exists():
         Dashboard.objects.create(user=user, url=website, status=code, status_send_to=user.username)
@@ -47,22 +50,26 @@ def sendAlert(request, website,url):
     print(website,code,print_time())
 
 
-def check(request, li,url):
+def check(user_id, li,url):
+    user = User.objects.filter(id=user_id).first()
     flag = True
     while flag:
         for i in li:
             print("url",i, type(i))
             if 200 != get_website_status(i):
+                print(i, "not 200")
                 if i not in already_alert_sent_websites:
-                    sendAlert(request, i,url)
+                    sendAlert(user_id, i,url)
                     already_alert_sent_websites.append(i)
                 else:
                     continue
         flag = False
-from asgiref.sync import sync_to_async
 
-@sync_to_async
-def websiteChecking(request, final_urls,url, checking_time_in_seconds, alert_time_in_seconds):
+
+
+def websiteChecking(user_id, final_urls,url, checking_time_in_seconds, alert_time_in_seconds):
+    user = User.objects.filter(id=user_id).first()
+    print("yes")
     start_time = time.time()
     while True:
         end_time = time.time()
@@ -71,7 +78,7 @@ def websiteChecking(request, final_urls,url, checking_time_in_seconds, alert_tim
             global already_alert_sent_websites
             already_alert_sent_websites = []
             start_time = time.time()
-        check(request,final_urls,url)
+        check(user.id,final_urls,url)
         time.sleep(float(checking_time_in_seconds)*60)
         
 

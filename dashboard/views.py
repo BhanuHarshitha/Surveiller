@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .monitor import *
 import asyncio
 import threading
+from asgiref.sync import sync_to_async
+from django_q.tasks import async_task
 # Create your views here.
 def userdashboard(request):
     return render(request,'dashboard/index.html')
@@ -12,13 +14,15 @@ def status(request):
 def dashabout(request):
     return render(request,'dashboard/dash_about.html')
 
-async def uploadTxt(request):
+
+def uploadTxt(request):
     if request.method=='POST':
-        user = request.user
+        user_id = request.user.id
         checking_time=request.POST['fader']
         alert_type=request.POST['optradios']
         w_url=request.POST.get('w_url')
         alert_time=request.POST['optradio1']
+
         file=request.FILES['file1'].readlines()
         final_urls = []
         for sing_url in file:
@@ -26,11 +30,12 @@ async def uploadTxt(request):
             final_urls.append(s_url)
         # print(final_urls)
         websites_list = Dashboard.objects.filter(user=request.user)
+        t1 = threading.Thread(target=websiteChecking(user_id,final_urls,w_url,checking_time,alert_time), name='t1')
+        t1.start()
         context = {'websites_list': websites_list}
-        # t1 = threading.Thread(target=websiteChecking(request,final_urls,w_url,checking_time,alert_time), name='t1')
-        # t1.start()
-        asyncio.create_task(websiteChecking(request,final_urls,w_url,checking_time,alert_time))
+        # async_task(websiteChecking, user_id,final_urls,w_url,checking_time,alert_time)
         return render(request, 'dashboard/status.html', context=context)
+
         
         
         
