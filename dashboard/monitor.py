@@ -21,7 +21,7 @@ already_alert_sent_websites = []
 
 def get_website_status(url):
     try:
-        with urlopen(f"https://{url}") as connection:
+        with urlopen(url) as connection:
             code = connection.getcode()
             #print(code)
             return code
@@ -29,10 +29,13 @@ def get_website_status(url):
         return e.code
     except URLError as e:
         return e.reason
+    except TimeoutError as e:
+        return "Time out"
 
 # result = get_website_status("https://www.amazon.ca/")
 
 def sendAlert(user_id, website,url):
+    print("called")
     code=get_website_status(website)
     message_headers = {'Content-Type': 'application/json; charset=UTF-8'}
     bot={'text':"The website {} is down and the status is {}.".format(website,code)}
@@ -52,18 +55,18 @@ def sendAlert(user_id, website,url):
 
 def check(user_id, li,url):
     user = User.objects.filter(id=user_id).first()
-    flag = True
-    while flag:
-        for i in li:
-            print("url",i, type(i))
-            if 200 != get_website_status(i):
-                print(i, "not 200")
-                if i not in already_alert_sent_websites:
-                    sendAlert(user_id, i,url)
-                    already_alert_sent_websites.append(i)
-                else:
-                    continue
-        flag = False
+    print(li)
+    for i in li:
+        print("url",i, type(i))
+        if 200 != get_website_status(i):
+            print(i, "not 200")
+            if i not in already_alert_sent_websites:
+                sendAlert(user_id, i,url)
+                already_alert_sent_websites.append(i)
+            else:
+                continue
+        else:
+            print('200')
 
 
 

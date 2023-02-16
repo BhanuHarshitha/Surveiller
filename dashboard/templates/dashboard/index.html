@@ -27,19 +27,28 @@
         <div>
             <label for="optradio">Send alerts to</label>
             <fieldset data-role = "controlgroup" data-type = "horizontal" id="alerts_to" name="alerts_to">
-                <input type = "radio" id="optradioe" name="optradios" value="email" />
+                <input type = "radio" id="optradioe" name="optradios" value="email" onclick="showUrlInput()" />
                 <label for = "optradioe"  style="font-size: 15px;">Email</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-                <input type = "radio" id="optradiog" name="optradios" value="chat"/>
+                <input type = "radio" id="optradiog" name="optradios" value="chat" onclick="showUrlInput()"/>
                 <label for = "optradiog"  style="font-size: 15px;">Google Chat</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     
-                <input type = "radio" id="optradiot" name="optradios" value="teams" />
+                <input type = "radio" id="optradiot" name="optradios" value="teams" onclick="showUrlInput()"/>
                 <label for = "optradiot"  style="font-size: 15px;">Teams</label>
              </fieldset>
         </div>
-        <div>
-            <label for="url">Enter appropriate Webhook URL</label>
-            <input type="url" id="w_url" name="w_url" placeholder="Enter webhook url">
+
+        <div id="chat-url" style="display: none;">
+            <label for="url">Enter Googlechat Webhook URL:</label>
+            <input type="text" id="url" name="url">
+        </div>
+        <div id="teams-url" style="display: none;">
+            <label for="url">Enter Teams Webhook URL:</label>
+            <input type="text" id="url" name="url">
+        </div>
+        <div id="em-url" style="display: none;">
+            <label for="url">Enter Email:</label>
+            <input type="email" id="url" name="url">
         </div>
         
         <!--div>
@@ -73,9 +82,35 @@
 </div>
 
 <script>
-    var email =  document.getElementById("alerts_to").value
-    console.log(email+"hi");
-</script>
+    function showUrlInput() {
+      var chaturl = document.getElementById("chat-url");
+      var teamsurl = document.getElementById("teams-url");
+      var ema = document.getElementById("em-url");
+      var gchat = document.getElementById("optradiog");
+      var teams = document.getElementById("optradiot");
+      var email = document.getElementById("optradioe");
+      if(email.checked){
+        ema.style.display = "none";
+        chaturl.style.display = "none";
+        teamsurl.style.display = "none";
+      }
+      else if (gchat.checked) {
+        chaturl.style.display = "block";
+        teamsurl.style.display = "none";
+        ema.style.display = "none";
+      } else if (teams.checked){
+        chaturl.style.display = "none";
+        teamsurl.style.display = "block";
+        ema.style.display = "none";
+      
+      }
+      else {
+        ema.style.display = "none";
+        chaturl.style.display = "none";
+        teamsurl.style.display = "none";
+      }
+    }
+  </script>
 
 </body>
 {% endblock content %}
