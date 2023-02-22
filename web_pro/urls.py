@@ -28,6 +28,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='website/home.html'), name='logout'),
+    path('social-auth/',include('social_django.urls',namespace='social')),
     path('index/',dash_views.userdashboard,name='index'),
     path('status/',dash_views.status,name='status'),
     path('dabout/',dash_views.dashabout,name='dabout'),

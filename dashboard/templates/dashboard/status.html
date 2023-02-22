@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 <body>
-  {% if websites_list %}
+
     <table style="width:100%; border:1px solid black;">
         <tr>
           <th style='border:1px solid black'>URL</th>
@@ -12,19 +12,7 @@
         </tr>
        
       </table>
-      <table class="highlight bordered responsive-table">
 
-        <tbody>
-        {% for website in websites_list %}
-          <thead>
-           <tr>
-             <th>{{website.status}}</th><td>{{website.url}</td>
-           </tr>
-          </thead>
-       {% endfor %}
-               </tbody>
-      </table>
-    {% endif %}
       
 </body>
 {% endblock content %}
