@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thewatcherpage-prod
+spec:
+  selector:
+    matchLabels:
+      app: thewatcherpage-prod
+  template:
+    metadata:
+      labels:
+        app: thewatcherpage-prod
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: thewatcherpageprod
+        image: nitron181/the_watcher_repo:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prod-service
+spec:
+  selector:
+    app: thewatcherpage-prod
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: prod-ingress
+spec:
+  rules:
+  - host: thewatcherpage.info
+    http:
+      paths:
+      - backend:
+          service:
+            name: prod-service
+            port:
+              name: http
+              number: 80
+        path: /
+        pathType: Prefix
