@@ -1,0 +1,15 @@
+replicaCount: 2
+appname: qa-thewatcherpage
+namespace: qa
+image:
+  name: nitron181/the_watcher_repo
+  tag: v2
+
+service:
+  svcname: qa-service
+  port: 80
+
+ingress:
+  ingname: qa-ingress
+  host: qa.thewatcherpage.info
+  
